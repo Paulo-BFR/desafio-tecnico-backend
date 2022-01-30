@@ -4,32 +4,34 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
-
 
 @Entity
 @Table(name = "user", schema = "teste_residencia")
 public class User {
-			
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+	@SequenceGenerator(name = "user_generator", sequenceName = "user_seq", schema = "teste_residencia")
 	@Column(name = "id", nullable = false)
-	private Integer id;	
-	
-	@Column(name = "login", nullable = false,  length = 12)
+	private Integer id;
+
+	@Column(name = "login", nullable = false, length = 12)
 	@Size(max = 12)
 	private String login;
-	
-	
-	@Column(name = "password", nullable = false,  length = 100)
+
+	@Column(name = "password", nullable = false, length = 100)
 	@Size(max = 100)
 	private String password;
-	
+
 	@Column(name = "last_login_date")
 	private Date lastLoginDate;
-	
+
 	public User(Integer id, String login, String password, Date lastLoginDate) {
 		super();
 		this.id = id;
@@ -66,16 +68,12 @@ public class User {
 		this.password = password;
 	}
 
-
-
 	public Date getLastLoginDate() {
 		return lastLoginDate;
 	}
 
-
-
 	public void setLastLoginDate(Date lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
-	
+
 }

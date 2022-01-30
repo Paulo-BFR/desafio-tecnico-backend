@@ -2,9 +2,6 @@ package br.com.neki.testeResidencia.service;
 
 import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,10 +49,9 @@ public class UserService {
 		return true;
 	}
 
-	public User logar(@Valid User user) {
+	public User logar( User user) {
 		
-		//return userRepository.logar(user);
-		return null;
+		return userRepository.logar(user.getLogin(), user.getPassword());
 	}
 
 }

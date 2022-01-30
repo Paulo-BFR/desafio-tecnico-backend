@@ -79,6 +79,12 @@ public class UserController {
 	@PostMapping("/login")
 	public ResponseEntity<User> logar( @Valid @RequestBody User user){
 		User user1 = userService.logar(user);
-		return ResponseEntity.ok(user1);
+		if( null != user1) {
+			
+			return ResponseEntity.ok(user1);
+		}
+		else {
+			return ResponseEntity.badRequest().build();
+		}
 	}
 }
